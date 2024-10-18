@@ -2,3 +2,16 @@ name: PseudoHardcore
 version: 1.0.0
 main: com.hrveklesarov.PseudoHardcore
 api-version: 1.21
+commands:
+  hc-tag:
+    description: Tag a player or list of players
+    usage: hc-tag
+    permission: Operators
+  hc-untag:
+    description: Untag a player or list of players
+    usage: hc-untag
+    permission: Operators
+  hc-tagme:
+    description: Tag yourself
+    usage: hc-tagme
+    permission: Everybody

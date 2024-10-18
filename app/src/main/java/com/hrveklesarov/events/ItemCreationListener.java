@@ -1,11 +1,7 @@
 package com.hrveklesarov.events;
 
-import java.util.List;
-
-import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
@@ -16,11 +12,9 @@ import org.bukkit.event.inventory.PrepareSmithingEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
-import com.hrveklesarov.PseudoHardcore;
+import com.hrveklesarov.config.Config;
 
 public class ItemCreationListener implements Listener {
-    private PseudoHardcore plugin = (PseudoHardcore) Bukkit.getPluginManager().getPlugin(PseudoHardcore.NAME);
-
     @EventHandler
     public void enchantItem(EnchantItemEvent event) {
         this.tryAddCurseOfVanishing(event.getItem(), event.getEnchanter());
@@ -63,29 +57,8 @@ public class ItemCreationListener implements Listener {
         }
     }
 
-    private boolean isValidPlayer(HumanEntity player) {
-        List<String> taggedPlayers = (List<String>) this.plugin.getConfig().getList(PseudoHardcore.TAGGED_PLAYERS_LIST);
-        if (taggedPlayers == null) {
-            return false;
-        }
-
-        Bukkit.getLogger().info(String.valueOf(taggedPlayers.size()));
-
-        Player targetPlayer = Bukkit.getPlayer(player.getName());
-        if (targetPlayer == null) {
-            return false;
-        }
-
-        return taggedPlayers.stream().anyMatch((String playerName) -> {
-            if (playerName == null) {
-                return false;
-            }
-
-            Player taggedPlayer = Bukkit.getPlayer(playerName);
-            if (taggedPlayer == null) {
-                return false;
-            }
-
+    private boolean isValidPlayer(HumanEntity targetPlayer) {
+        return Config.getTaggedPlayers().stream().anyMatch(taggedPlayer -> {
             return taggedPlayer.getName().equals(targetPlayer.getName());
         });
     }
