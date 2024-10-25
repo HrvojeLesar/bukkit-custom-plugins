@@ -8,7 +8,6 @@ import com.hrveklesarov.command.TagMe;
 import com.hrveklesarov.command.TagPlayer;
 import com.hrveklesarov.command.UntagPlayer;
 import com.hrveklesarov.events.ItemCreationListener;
-import com.hrveklesarov.events.MountMe;
 
 public class PseudoHardcore extends JavaPlugin {
     public static final String NAME = "PseudoHardcore";
@@ -35,6 +34,5 @@ public class PseudoHardcore extends JavaPlugin {
 
     private void registerEvents() {
         this.pluginManager.registerEvents(new ItemCreationListener(), this);
-        this.pluginManager.registerEvents(new MountMe(), this);
     }
 }
